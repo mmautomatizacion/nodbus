@@ -1,6 +1,6 @@
 {
     "name": "NodBus",    
-    "version": "0.7b",
+    "version": "0.7.0",
     "author": "Manuel Martínez Automatización y Pesaje Industrial",
     "description": "Cliente ModBus para Node.JS diseñado completamente en JavaScript.",
     "main": "./lib/modbus.js"
