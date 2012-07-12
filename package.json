@@ -1,5 +1,5 @@
 {
-    "name": "modbus",    
+    "name": "nodbus",    
     "version": "0.2.0",
     "author": "Manuel Martínez Automatización y Pesaje Industrial",
     "description": "cliente ModBus preparado para varios tipos de servidores",
