@@ -1,0 +1,61 @@
+*********************************************************************
+*
+*   CONTROLADOR DE MODBUS PARA NODE.JS
+*
+*   Descripción: Driver encargado de enviar y recibir paquetes a cualquier dispositivo ModBus TCP. De momento, sólo de lectura
+*   Autor: Luis Gómez para Manuel Martínez Automatización y Pesaje Industrial, S.L.U.
+*
+*********************************************************************
+
+
+[  INSTALACIÓN  ]
+Este programa funciona como un módulo de Node.JS. Para instalarlo, basta con copiar los ficheros de este directorio en el directorio "node_modules", dentro de una carpeta que crearemos y llamaremos "modbus"
+Una vez esta carpeta haya sido creada y los ficheros se encuentren en su interior, ya podremos utilizarlo sin problemas
+
+
+
+[  AÑADIR DISPOSITIVO  ]
+Para crear un servidor básico, simplemente tendremos que crearnos un fichero JavaScript, el cual contenga la siguiente línea al inicio del mismo:
+
+    var modbus = require("modbus");
+
+A partir de aquí, la variable modbus nos servirá como objeto referencia para cada dispositivo. De esta forma, para establecer un dispositivo nuevo tan sólo tendremos que escribir la siguiente línea:
+
+    dispositivo = new modbus([CONTROLADOR], [INFO]);
+
+En [CONTROLADOR] tendremos que facilitar el tipo de driver que utilizaremos en forma de string. Por ejemplo, si queremos conectar con un dispositivo modbus ethernet bajo protocolo TCP, pondremos 'TCP'.
+En [INFO] se facilita información sobre el dispositivo que queremos establecer. Cada tipo de driver puede tener una información distinta que tendremos que facilitar para que funcione correctamente. La estructura de este campo es la siguiente:
+
+    { Dato1: Valor1, Dato2: Valor2}
+
+
+[  DATOS COMUNES  ]
+- id: Identificador del dispositivo. Sólo sirve en caso de tener varios dispositivos
+- endian: indica el orden de los bytes tanto a la hora de enviarlos como de recibirlos. Depende de cada dispositivo. Puede ser Big Endian (BE) o Little Endian (LE)
+- bytesPorPosicion: Normalmente, cada posición del dispositivo supone recoger 2 bytes. Este parámetro puede cambiar en algunos dispositivos.
+- estructuraCabecera: Establece la estructura de la cabecera del dispositivo. No suele ser alterada
+- tags: Se establece el nombre, posición y tipo de los datos que se van a leer. Su estructura la veremos más adelante.
+
+
+[  DATOS DE CADA DRIVER  ]
+TCP
+- ip: IP del dispositivo
+- puerto: Puerto del protocolo/dispositivo
+
+[  DEFINICIÓN DE TAGS ]
+De cada dispositivo podremos nombrar una serie las posiciones de forma que, a la hora de solicitar el valor de una posición determinada, podamos hacerlo a través de su nombre. Se establecen como información del dispositivo y su estructura es la siguiente:
+
+    {NombreDato: {posicion: [POS], tipo: [TIPO]}
+
+Donde [POS] es el número de posición del dato. Este debe coincidir con el del dispositivo. Y [TIPO] se refiere al tipo de dato. Este puede ser "BYTE" (byte), "INT" (entero), "DINT" (doble entero), "FLOAT" (flotante) y "DOUBLE" (doble)
+
+
+[  SOLICITAR UNO O VARIOS DATOS  ]
+
+    dispositivo.leer([NOMBREDATO], [CALLBACK]);
+
+[CALLBACK] será la función que se realizará una vez recibamos los datos. Esta función recibe como parámetro la variable con los datos recibidos.
+
+Para solicitar todos los tags, se puede llamar a la siguiente función:
+
+    dispositivo.leerTodo([CALLBACK]);
