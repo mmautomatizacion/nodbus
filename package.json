@@ -1,7 +1,8 @@
 {
-    "name": "NodBus",    
-    "version": "0.7b",
-    "author": "Manuel Martínez Automatización y Pesaje Industrial",
-    "description": "Cliente ModBus para Node.JS diseñado completamente en JavaScript.",
+    "name": "nodbus",
+    "description": "ModBus Protocol Controller written 100% in Node.JS JavaScript.",
+    "version": "0.8b",
+    "author": "Manuel Martínez Automatización y Pesaje Industrial, S.L.U. <luis@mmautomatizacion.com>",
+    "repository": {"type": "git", "url": "https://github.com/lgruz/NodBus.git"},
     "main": "./lib/modbus.js"
 }
