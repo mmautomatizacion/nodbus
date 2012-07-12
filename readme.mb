@@ -1,8 +1,9 @@
 *********************************************************************
 *
-*   CONTROLADOR DE MODBUS PARA NODE.JS
+*                NODBUS
+*   Controlador de Modbus para Node.JS
 *
-*   Descripción: Driver encargado de enviar y recibir paquetes a cualquier dispositivo ModBus TCP. De momento, sólo de lectura
+*   Descripción: Driver encargado de enviar y recibir paquetes a cualquier dispositivo ModBus TCP.
 *   Autor: Luis Gómez para Manuel Martínez Automatización y Pesaje Industrial, S.L.U.
 *
 *********************************************************************
@@ -21,8 +22,9 @@ Para crear un servidor básico, simplemente tendremos que crearnos un fichero Ja
 
 A partir de aquí, la variable modbus nos servirá como objeto referencia para cada dispositivo. De esta forma, para establecer un dispositivo nuevo tan sólo tendremos que escribir la siguiente línea:
 
-    dispositivo = new modbus([CONTROLADOR], [INFO]);
+    dispositivo = new modbus([NOMBRE], [CONTROLADOR], [INFO]);
 
+En [NOMBRE] daremos una cadena de texto que identificará al dispositivo cuando se muestren mensajes o alarmas.
 En [CONTROLADOR] tendremos que facilitar el tipo de driver que utilizaremos en forma de string. Por ejemplo, si queremos conectar con un dispositivo modbus ethernet bajo protocolo TCP, pondremos 'TCP'.
 En [INFO] se facilita información sobre el dispositivo que queremos establecer. Cada tipo de driver puede tener una información distinta que tendremos que facilitar para que funcione correctamente. La estructura de este campo es la siguiente:
 
@@ -45,9 +47,9 @@ TCP
 [  DEFINICIÓN DE TAGS ]
 De cada dispositivo podremos nombrar una serie las posiciones de forma que, a la hora de solicitar el valor de una posición determinada, podamos hacerlo a través de su nombre. Se establecen como información del dispositivo y su estructura es la siguiente:
 
-    {NombreDato: {posicion: [POS], tipo: [TIPO]}
+    {[NOMBREDATO]: {posicion: [POS], tipo: [TIPO]}
 
-Donde [POS] es el número de posición del dato. Este debe coincidir con el del dispositivo. Y [TIPO] se refiere al tipo de dato. Este puede ser "BYTE" (byte), "INT" (entero), "DINT" (doble entero), "FLOAT" (flotante) y "DOUBLE" (doble)
+Donde [NOMBREDATO] es el nombre que le asignaremos para identificarlo una vez recogido. [POS] es el número de posición del dato. Este debe coincidir con el del dispositivo. Y [TIPO] se refiere al tipo de dato. Este puede ser "BYTE" (byte), "INT" (entero), "DINT" (doble entero), "FLOAT" (flotante) y "DOUBLE" (doble)
 
 
 [  SOLICITAR UNO O VARIOS DATOS  ]
@@ -59,3 +61,13 @@ Donde [POS] es el número de posición del dato. Este debe coincidir con el del 
 Para solicitar todos los tags, se puede llamar a la siguiente función:
 
     dispositivo.leerTodo([CALLBACK]);
+
+
+
+[  ESCRIBIR UN DATO  ]
+
+    dispositivo.escribir([DATO], [VALOR], [CALLBACK]);
+
+En [DATO] facilitaremos un objeto, en formato similar a los tags, con la información de la posición a escribir. También podemos utilizar una cadena de texto referente a un tag ya definido.
+[VALOR] contendrá el nuevo valor que queremos escribir en la posición determinada.
+Finalmente, se ejecutará la función contenida en [CALLBACK] para asegurar que los datos se han escrito correctamente.
