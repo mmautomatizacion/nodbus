@@ -1,6 +1,6 @@
 {
     "name": "modbus",    
-    "version": "0.2b",
+    "version": "0.2.0",
     "author": "Manuel Martínez Automatización y Pesaje Industrial",
     "description": "cliente ModBus preparado para varios tipos de servidores",
     "main": "./lib/modbus.js"
