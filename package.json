@@ -1,8 +1,8 @@
 {
     "name": "nodbus",
     "description": "Client for ModBus Protocol written in pure JavaScript for Node.JS",
-    "version": "0.9.0",
+    "version": "0.9.1",
     "author": "Manuel Martínez Automatización y Pesaje Industrial, S.L.U. <luis@mmautomatizacion.com>",
     "private": true,
-    "main": "./lib/modbus.js"
+    "main": "./lib/dispositivo.js"
 }
