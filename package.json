@@ -1,11 +1,18 @@
 {
-    "name": "nodbus",
-    "description": "Client for ModBus Protocol written in pure JavaScript for Node.JS",
-    "keywords": ["modbus", "industrial"],
-    "version": "0.9.1",
-    "license": "GPL-3.0",
-    "author": "Manuel Martínez Automatización y Pesaje Industrial, S.L.U. <luis@mmautomatizacion.com>",
-    "repository": "mmautomatizacion/nodbus",
-    "private": false,
-    "main": "./lib/dispositivo.js"
+  "name": "nodbus",
+  "description": "Client for ModBus Protocol written in pure JavaScript for Node.JS",
+  "keywords": [
+    "modbus",
+    "industrial",
+    "comunicación",
+    "communication",
+    "protocolo",
+    "protocol"
+  ],
+  "version": "1.0.0",
+  "license": "GPL-3.0",
+  "author": "Manuel Martínez Automatización y Pesaje Industrial, S.L.U. <luis@mmautomatizacion.com>",
+  "repository": "mmautomatizacion/nodbus",
+  "private": false,
+  "main": "./lib/dispositivo.js"
 }
