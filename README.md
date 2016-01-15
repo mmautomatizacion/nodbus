@@ -1,7 +1,6 @@
 # Información Inicial #
 
 NodBus es un controlador del protocolo Modbus escrito 100% en JavaScript para Node.JS
-> NodBus by Manuel Martínez Automatización y Pesaje Industrial, S.L.U. is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
 
 ---------------------
 
