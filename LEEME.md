@@ -48,6 +48,7 @@ dispositivo.leerMultiplesRegistros(function(datos) {
   // Todos los tags leídos correctamente.
   console.log(datos);
 });
+```
 
 
 ## Escribiendo Tag ##
