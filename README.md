@@ -1,87 +1,102 @@
-# Información Inicial #
+# NodBus #
 
-NodBus es un controlador del protocolo Modbus escrito 100% en JavaScript para Node.JS
-
----------------------
-
-# Primeros pasos #
-
-## Instalación ##
-Una vez tengamos instalados Node.JS y NPM, escribir en la consola del sistema lo siguiente:
-
-    npm install nodbus
-
-
-
-## Declarando un dispositivo ModBus TCP simple ##
-
-    var nodbus = require("nodbus");
-
-    dispositivo = new nodbus("NombreDispositivo", "TCP", {
-      ip: '192.168.1.20',
-      puerto: 502,
-      tags: {
-        NombreTag: {posicion: 602, tipo: 'FLOAT'},
-        NombreTag2: {posicion: 604, tipo: 'DINT'}
-      }
-    });
-
-## leer Tags ##
-
-    dispositivo.fc3({'NombreTag', 'NombreTag2'}, function(datos) {
-      // Tags leídos correctamente.
-      console.log(datos);
-    });
-
-## Escribiendo Tag ##
-
-    dispositivo.fc16('NombreTag', 452, function() {
-      // Tag escrito correctamente.
-    });
-
-## Iniciar servidor NodBus ##
-En la consola, sitúate en el directorio del fichero JavaScript creado, y escribe:
-
-    node nodBusServer.js
+Slave Controller for ModBus TCP Protocol. Written for Node.JS in full JavaScript
 
 ---------------------
 
-# Configuración Avanzada #
 
-## Parámetros del dispositivo ##
-Para cada dispositivo podemos configurar una serie de parámetros. Por ejemplo, esta es una definición completa del protocolo ModBus TCP:
+# First steps #
 
-    dispositivo = new nodbus("NombreDispositivo", "TCP", {
-      id: 1,
-      ip: '192.168.1.20',
-      puerto: 502,
-      endian: 'LE',
-      bytesPorPosicion: 2,      
-      tags: {
-        NombreTag: {posicion: 602, tipo: 'FLOAT'},
-        NombreTag: {posicion: 604, tipo: 'DINT'}
-      }
-    });
+## Instalation ##
+Once we have installed Node.JS and NPM, write in console the next command:
 
-*id* es el identificador del dispositivo. Este es configurado en el propio dispositivo  
-*ip* es la dirección IP  
-*puerto* es el puerto. 502 por defecto  
-*endian* puede ser definido como BE (Big Endian), LE (Little Endian), BEW (Big Endian by Word) o LEW (Little Endian by Word)  
-*bytesPorPosicion* establece la cantidad de bytes contenidos en una sóla posición del dispositivo  
-*tags* configura las posiciones y tipos de datos del dispositivo  
+```bash
+npm install nodbus
+```
 
-## Tipos de datos ##
+
+
+## Declaring a simple ModBus TCP device ##
+To start reading or writing data with NodBus just have to create a "nodbus" object for each ModBus Master that we want to connect. This example show how to connect to a ModBus master with IP 192.168.1.20, declaring two tags for read and write.
+
+```js
+var nodbus = require("nodbus");
+
+device = new nodbus("NameOfDevice", "TCP", {
+  ip: '192.168.1.20',
+  puerto: 502,
+  tags: {
+    TagName: {posicion: 602, tipo: 'FLOAT'},
+    TagName2: {posicion: 604, tipo: 'DINT'}
+  }
+});
+```
+
+## Read tags ##
+For read tags, have to execute the corresponding function and define what tags want to read. In the example we read two tags through FC3 function (ReadMultipleRegisters). These tags were defined previously.
+
+```js
+device.readMultipleRegisters({'TagName', 'TagName'}, function(data) {
+  // Tags read correctly.
+  console.log(data);
+});
+```
+
+Or we can read all the tags defined:
+```js
+device.readMultipleRegisters(function(data) {
+  // Tags read correctly.
+  console.log(data);
+});
+
+
+## Writing tags ##
+For writing tags, we have to execute the corresponding function. In this example, we use the function FC16 (WriteMultipleRegister) to write 452 in "TagName" tag.
+
+```js
+device.writeMultipleRegisters('TagName', 452, function() {
+  // Tag written correctly.
+});
+```
+
+---------------------
+
+# Advanced configuration #
+
+## Device parameters ##
+For each device we can configure a lot of optional parameters. For example, this is the complete defition for ModBus TCP protocol:
+
+```js
+device = new nodbus("DeviceName", "TCP", {
+  id: 1,
+  ip: '192.168.1.20',
+  puerto: 502,
+  endian: 'LE',
+  bytesPorPosicion: 2,
+  tags: {
+    TagName: {posicion: 602, tipo: 'FLOAT'},
+    TagName2: {posicion: 604, tipo: 'DINT'}
+  }
+});
+```
+
+*id* is the ID of the device. This is configured in the device 
+*ip* is the IP direction 
+*puerto* is the port
+*endian* can be defined like BE (Big Endian), LE (Little Endian), BEW (Big Endian by Word) or LEW (Little Endian by Word)  
+*bytesPorPosicion* define the amount of bytes for one position in the master device
+*tags* configure position and data type for each tag in the device
+
+## Data types ##
 - **BYTE** 8 bits
-- **INT** Entero con signo de 16 bits
-- **UINT** Entero sin signo de 16 bits
-- **DINT** Entero con signo de 32 bits
-- **UDINT** Entero sin signo de 32 bits
-- **FLOAT** Número con coma flotante de 32 bits
-- **DOUBLE** Número con coma flotante de 64 bits
+- **INT** Signed Integer of 16 bits
+- **UINT** Unsigned Integer of 16 bits
+- **DINT** Signed Integer of 32 bits
+- **UDINT** Unsigned Integer of 32 bits
+- **FLOAT** Floating Point number of 32 bits
+- **DOUBLE** Floating Point number of 64 bits
 
 ## Alias ##
-Por comodidad, he creado algunos alias que referencian a los números de funciones:
-- **dispositivo.leer** FC3
-- **dispositivo.leerTodo** FC3 para todos los tags definidos
-- **dispositivo.escribirPalabra** FC6
-- **dispositivo.escribir** FC16 limitado a una sóla posición
+- **dispositivo.readMultipleRegisters** FC3
+- **dispositivo.writeSingleRegisters** FC6
+- **dispositivo.writeMultipleRegisters** FC16 (limited to one register)
