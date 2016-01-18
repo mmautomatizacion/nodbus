@@ -48,7 +48,7 @@ device.readMultipleRegisters(function(data) {
   // Tags read correctly.
   console.log(data);
 });
-
+```
 
 ## Writing tags ##
 For writing tags, we have to execute the corresponding function. In this example, we use the function FC16 (WriteMultipleRegister) to write 452 in "TagName" tag.
