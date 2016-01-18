@@ -32,6 +32,11 @@ dispositivo = new nodbus("NombreDispositivo", "TCP", {
     NombreTag2: {posicion: 604, tipo: 'DINT'}
   }
 });
+
+
+dispositivo.on("conectado", function() {
+  // Conectados correctamente a disposito
+});
 ```
 
 ## Leer tags ##

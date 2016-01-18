@@ -32,6 +32,10 @@ device = new nodbus("NameOfDevice", "TCP", {
     TagName2: {posicion: 604, tipo: 'DINT'}
   }
 });
+
+device.on("connected", function() {
+  // Connected correctly to device
+});
 ```
 
 ## Read tags ##
