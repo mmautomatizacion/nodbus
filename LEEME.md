@@ -1,6 +1,8 @@
-# NodBus #
+![nodbus logo](https://raw.githubusercontent.com/mmautomatizacion/nodbus/master/bin/logoNodBus.png)
 
 Controlador esclavo del protocolo Modbus TCP escrito 100% en JavaScript para Node.JS.
+
+[![Build Status](https://travis-ci.org/mmautomatizacion/nodbus.svg?branch=master)](https://travis-ci.org/mmautomatizacion/nodbus)
 
 ---------------------
 
