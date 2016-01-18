@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ![nodbus logo](https://raw.githubusercontent.com/mmautomatizacion/nodbus/master/bin/logoNodBus.png)
+=======
+[![nodbus logo](https://raw.githubusercontent.com/mmautomatizacion/nodbus/master/bin/logoNodBus.png)]
+>>>>>>> c0f96d8b26262ee6d20d56b08d5c1b49e4fc1a24
 
 Slave Controller for ModBus TCP Protocol. Written for Node.JS in full JavaScript
 
