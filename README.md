@@ -1,4 +1,4 @@
-# NodBus #
+[![nodbus logo](https://raw.githubusercontent.com/mmautomatizacion/nodbus/master/bin/logoNodBus.png)]
 
 Slave Controller for ModBus TCP Protocol. Written for Node.JS in full JavaScript
 
@@ -80,12 +80,12 @@ device = new nodbus("DeviceName", "TCP", {
 });
 ```
 
-*id* is the ID of the device. This is configured in the device 
-*ip* is the IP direction 
-*puerto* is the port
+*id* is the ID of the device. This is configured in the device  
+*ip* is the IP direction  
+*puerto* is the port  
 *endian* can be defined like BE (Big Endian), LE (Little Endian), BEW (Big Endian by Word) or LEW (Little Endian by Word)  
-*bytesPorPosicion* define the amount of bytes for one position in the master device
-*tags* configure position and data type for each tag in the device
+*bytesPorPosicion* define the amount of bytes for one position in the master device  
+*tags* configure position and data type for each tag in the device  
 
 ## Data types ##
 - **BYTE** 8 bits
